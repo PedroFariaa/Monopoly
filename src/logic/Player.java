@@ -1,14 +1,41 @@
 package logic;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
 public class Player {
+	private String name;
 	private String token;
 	private int position;
+	private int previous_position;
 	private int money;
-	private ArrayList<Space> ownproperties;
+	private int arested_time=3;
+	private Vector<Space> ownproperties;
 	private int worth;
-	private boolean active;
+	// false is the player has already lost
+	private boolean alive;
+	private boolean ddice;
+	
+	public Player(){
+		this.name="default";
+		this.token="carro";
+		this.position=0;
+		this.previous_position=position;
+		this.money=1500;
+		this.worth=1500;
+		this.alive=true;
+		this.arested_time=0;
+	}
+	
+	public Player(String name, String token){
+		this.name = name;
+		this.token = token;
+		this.position=0;
+		this.previous_position=position;
+		this.money=1500;
+		this.worth=1500;
+		this.alive=true;
+		this.arested_time=0;
+	}
 	
 	//token related methods
 	public String getToken() {
@@ -17,7 +44,6 @@ public class Player {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	
 	//position related methods
 	public int getPosition() {
 		return position;
@@ -25,7 +51,6 @@ public class Player {
 	public void setPosition(int position) {
 		this.position = position;
 	}
-	
 	//money related methods
 	public int getMoney() {
 		return money;
@@ -39,12 +64,11 @@ public class Player {
 	public void removeMoney(int money){
 		this.money = this.money - money;
 	}
-	
 	//properties related methods
-	public ArrayList<Space> getOwnproperties() {
+	public Vector<Space> getOwnproperties() {
 		return ownproperties;
 	}
-	public void setOwnproperties(ArrayList<Space> ownproperties) {
+	public void setOwnproperties(Vector<Space> ownproperties) {
 		this.ownproperties = ownproperties;
 	}
 	public void addOwnproperties(Space property){
@@ -57,7 +81,6 @@ public class Player {
 		}else
 			return false;
 	}
-	
 	//worth related methods
 	public int getWorth() {
 		return worth;
@@ -65,14 +88,78 @@ public class Player {
 	public void setWorth(int worth) {
 		this.worth = worth;
 	}
-	
-	//active related methods
-	public boolean isActive() {
-		return active;
+	public void PassThroughStart(){
+		
 	}
-	public void setActive(boolean active) {
-		this.active = active;
+	public boolean Buy(){
+		return false;	
 	}
-	
-	
+	public boolean BuyProperty(){
+		return false;
+	}
+	public boolean SellProperty(){
+		return false;
+	}
+	public boolean LeaveJail(){
+		return false;
+	}
+	public boolean Mortage(){
+		return false;
+	}
+	public boolean Unmortgage(){
+		return false;
+	}
+	public boolean getAlive() {
+		return alive;
+	}
+	public void setAlive(boolean alive) {
+		this.alive = alive;
+	}
+	public int getPrevious_position() {
+		return previous_position;
+	}
+	public void setPrevious_position(int previous_position) {
+		this.previous_position = previous_position;
+	}
+	public void addBuild(){
+		
+	}
+	public int getArested_time() {
+		return arested_time;
+	}
+	public void setArested_time(int arested_time) {
+		this.arested_time = arested_time;
+	}
+
+	public boolean RollDice(){
+		int move1 = (int)(Math.random() * 6+1);
+		int move2 = (int)(Math.random() * 6+1);
+		if(move1==move2){
+			ddice = true;
+		}else{
+			ddice = false;
+		}
+		this.setPrevious_position(this.position);
+		this.setPosition(this.getPosition()+move1+move2);
+		
+		if(move1==move2)
+			return true;
+		else return false;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean getDdice() {
+		return ddice;
+	}
+
+	public void setDdice(boolean ddice) {
+		this.ddice = ddice;
+	}
 }
