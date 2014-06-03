@@ -8,7 +8,7 @@ public class Property extends Space {
 	private boolean owned;
 	private Player owner;
 	private int normalRent;
-	//rent increased by the number of apartments/hotel in the property
+	//the rent is increased by the number of apartments/hotel in the property
 	private int OneRent;
 	private int TwoRent;
 	private int ThreeRent;
@@ -16,6 +16,7 @@ public class Property extends Space {
 	private int HotelRent;
 	private int n_apart;
 	private int n_hotel;
+	private boolean mortgage=false;
 	
 	
 	public Property(String name, String color, int price, int normalRent, int OneRent, int TwoRent, int ThreeRent, int FourRent, int HotelRent){
@@ -28,6 +29,7 @@ public class Property extends Space {
 		this.ThreeRent=ThreeRent;
 		this.FourRent=FourRent;
 		this.HotelRent=HotelRent;
+		this.mortgage=false;
 	}
 	
 	public String getColor() {
@@ -58,25 +60,37 @@ public class Property extends Space {
 				this.owner.addMoney(this.getRent());
 			}
 		}else{
-			p.BuyProperty();
+			this.Buy(p);
 		}
 	}
-
+	
+	public void Buy(Player p){
+		if(p.getMoney() > this.getPrice()){
+			p.removeMoney(this.price);
+			p.addOwnproperties(this);
+			this.setOwned(true);
+			this.setOwner(p);
+		}
+	}
+	
 	private int getRent() {
 		int newrent = 0;
-		if(this.n_apart==0 && this.n_hotel==0){
-			newrent = normalRent;
-		}else if(this.n_hotel == 1){
-			newrent = HotelRent;
-		}else if(this.n_apart==4){
-			newrent = FourRent;
-		}else if(this.n_apart==3){
-			newrent = ThreeRent;
-		}else if(this.n_apart==2){
-			newrent = TwoRent;
-		}else if(this.n_apart==1){
-			newrent = OneRent;
+		if(!this.getMortgage()){
+			if(this.n_apart==0 && this.n_hotel==0){
+				newrent = normalRent;
+			}else if(this.n_hotel == 1){
+				newrent = HotelRent;
+			}else if(this.n_apart==4){
+				newrent = FourRent;
+			}else if(this.n_apart==3){
+				newrent = ThreeRent;
+			}else if(this.n_apart==2){
+				newrent = TwoRent;
+			}else if(this.n_apart==1){
+				newrent = OneRent;
+			}
 		}
+		
 		return newrent;
 	}
 	
@@ -129,5 +143,10 @@ public class Property extends Space {
 
 	public void setOwner(Player owner) {
 		this.owner = owner;
+	}
+
+	@Override
+	public boolean getMortgage() {
+		return this.mortgage;
 	}
 }

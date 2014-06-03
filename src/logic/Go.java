@@ -14,4 +14,9 @@ public class Go extends Space {
 		}
 	}
 
+	@Override
+	public boolean getMortgage() {
+		return false;
+	}
+
 }

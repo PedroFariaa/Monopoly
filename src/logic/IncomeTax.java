@@ -3,6 +3,10 @@ package logic;
 
 public class IncomeTax extends Space {
 
+	public IncomeTax(){
+		
+	}
+	
 	@Override
 	public void Action(Player p) {
 		//player can either pay 200$ or 10% of his worth
@@ -12,6 +16,11 @@ public class IncomeTax extends Space {
 		}else{
 			p.removeMoney(rent);
 		}
+	}
+
+	@Override
+	public boolean getMortgage() {
+		return false;
 	}
 
 }

@@ -6,6 +6,10 @@ import java.util.Scanner;
 public class Jail extends Space {
 	private Scanner s;
 
+	public Jail(){
+		
+	}
+	
 	@Override
 	public void Action(Player p) {
 		//may not let the player leave, once it is set only by the player is on the jail
@@ -32,6 +36,11 @@ public class Jail extends Space {
 			}
 		}
 		
+	}
+
+	@Override
+	public boolean getMortgage() {
+		return false;
 	}
 
 }

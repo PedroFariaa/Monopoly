@@ -62,7 +62,9 @@ public class Player {
 		this.money = this.money + money;
 	}
 	public void removeMoney(int money){
-		this.money = this.money - money;
+		if(this.getMoney() > money){
+			this.money = this.money - money;
+		}
 	}
 	//properties related methods
 	public Vector<Space> getOwnproperties() {
@@ -89,26 +91,20 @@ public class Player {
 		this.worth = worth;
 	}
 	public void PassThroughStart(){
+		if(this.getPosition() < this.getPrevious_position()){
+			this.addMoney(200);
+		}
+	}
 		
-	}
-	public boolean Buy(){
-		return false;	
-	}
-	public boolean BuyProperty(){
-		return false;
-	}
-	public boolean SellProperty(){
-		return false;
-	}
-	public boolean LeaveJail(){
-		return false;
-	}
+	
+	/*
 	public boolean Mortage(){
 		return false;
 	}
 	public boolean Unmortgage(){
 		return false;
 	}
+	*/
 	public boolean getAlive() {
 		return alive;
 	}
@@ -121,9 +117,11 @@ public class Player {
 	public void setPrevious_position(int previous_position) {
 		this.previous_position = previous_position;
 	}
+	
 	public void addBuild(){
 		
 	}
+	
 	public int getArested_time() {
 		return arested_time;
 	}
@@ -144,6 +142,8 @@ public class Player {
 			this.setPosition(this.getPosition()+move1+move2);
 		}
 		
+		this.PassThroughStart();
+		
 		if(move1==move2)
 			return true;
 		else
@@ -153,15 +153,12 @@ public class Player {
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public boolean getDdice() {
 		return ddice;
 	}
-
 	public void setDdice(boolean ddice) {
 		this.ddice = ddice;
 	}
