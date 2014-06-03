@@ -8,7 +8,7 @@ public class Player {
 	private int position;
 	private int previous_position;
 	private int money;
-	private int arested_time=3;
+	private int arested_time;
 	private Vector<Space> ownproperties;
 	private int worth;
 	// false is the player has already lost
@@ -139,12 +139,15 @@ public class Player {
 		}else{
 			ddice = false;
 		}
-		this.setPrevious_position(this.position);
-		this.setPosition(this.getPosition()+move1+move2);
+		if(this.getArested_time() == 0 || ddice==true){
+			this.setPrevious_position(this.position);
+			this.setPosition(this.getPosition()+move1+move2);
+		}
 		
 		if(move1==move2)
 			return true;
-		else return false;
+		else
+			return false;
 	}
 
 	public String getName() {

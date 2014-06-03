@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.Vector;
+
 import logic.Space;
 
 public class Game {
@@ -29,7 +30,7 @@ public class Game {
 	}
 
 	public Game(String tipo, int n_players){
-		//constroi tabuleiro
+		//constroi boarduleiro
 		//inicializa os jogadores
 		PlayGamePC(n_players);
 		PlayGamePlayers(n_players);
@@ -46,7 +47,7 @@ public class Game {
 		
 	}
 
-	private void PlayGamePC(int n_players) {
+	public void PlayGamePC(int n_players) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -59,12 +60,8 @@ public class Game {
 		this.tipo = tipo;
 	}
 	
-	public void main (int argc){
-		Game g = new Game();
-	}
-
-	private Game() {
-		board = Board();
+	public Game() {
+		this.board = Board();
 		players = Players();
 	}
 
@@ -74,10 +71,11 @@ public class Game {
 	}
 
 	private Vector<Space> Board() {
-		Go space0 = new Go();
+		Space space0 = new Go();
 		board.add(space0);
-		//finish property's constructor
-		Property space1 = new Property();
+		Property space1 = new Property("casa barata","blue",120, 3, 12, 25, 33, 42,60);
 		board.add(space1);
+
+		return this.board;
 	}
 }

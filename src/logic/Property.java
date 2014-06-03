@@ -17,8 +17,17 @@ public class Property extends Space {
 	private int n_apart;
 	private int n_hotel;
 	
-	public Property(String name, String color, int price ){
-		
+	
+	public Property(String name, String color, int price, int normalRent, int OneRent, int TwoRent, int ThreeRent, int FourRent, int HotelRent){
+		this.name=name;
+		this.color = color;
+		this.price=price;
+		this.normalRent=normalRent;
+		this.OneRent=OneRent;
+		this.TwoRent=TwoRent;
+		this.ThreeRent=ThreeRent;
+		this.FourRent=FourRent;
+		this.HotelRent=HotelRent;
 	}
 	
 	public String getColor() {

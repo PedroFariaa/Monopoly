@@ -5,8 +5,9 @@ public class GoToJail extends Space {
 
 	@Override
 	public void Action(Player p) {
-		// TODO Auto-generated method stub
-
+		p.setPosition(10);
+		p.setPrevious_position(30);
+		p.setArested_time(3);
 	}
 
 }
