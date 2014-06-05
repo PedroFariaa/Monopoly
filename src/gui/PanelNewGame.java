@@ -15,82 +15,141 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import javax.swing.JList;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JCheckBox;
 import javax.swing.JSeparator;
+
+import logic.Player;
 
 public class PanelNewGame extends JPanel {
 
 	private BufferedImage background;
 	private JButton btnNewButton, btnNewButton_1;
-	private JComboBox comboBox, comboBox_1;
-	private JSeparator separator;
-	
+	private JComboBox comboBox, comboBox_1, comboBox_2;
+	private MenuPanel NewMainMeu;
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField txtName;
+	private JPanel contentPanel;
 
 	public PanelNewGame(){
+
+		setSize(1150,650);
+
 		setBackground(new Color(240, 240, 240));
 		try {
 			background = ImageIO.read(new File("src/images/Monopoly.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		setBounds(100, 100, 850, 700);
-		this.setBackground(new Color(255, 255, 255));
-		this.setBorder(new EmptyBorder(5, 5, 5, 5));
-		this.setLayout(null);
-		this.setVisible(true);
-		this.setEnabled(true);
-		
-		ButtonsAndOtherElements();
-		
+		setLayout(null);
+
+
+		// Elements
+		txtName = new JTextField();
+		txtName.setBounds(350, 217, 86, 20);
+		txtName.setText("Name");
+		add(txtName);
+		txtName.setColumns(10);
+
+		btnNewButton = new JButton("Menu");
+		btnNewButton.setBounds(1007, 566, 101, 56);
+		btnNewButton.setBackground(new Color(255, 51, 51));
+		add(btnNewButton);
+
+		comboBox = new JComboBox();
+		comboBox.setBounds(350, 267, 63, 20);
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Dog", "Ship", "Hat", "Car"}));
+		add(comboBox);
+
+		comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(340, 367, 94, 20);
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Against PC", "Pass'n'Play", "Network Mode"}));
+		add(comboBox_1);
+
+		btnNewButton_1 = new JButton("PLAY !\r\n");
+		btnNewButton_1.setBounds(341, 478, 108, 66);
+		btnNewButton_1.setBackground(new Color(255, 51, 51));
+		add(btnNewButton_1);
+
+		comboBox_2 = new JComboBox();
+		comboBox_2.setBounds(399, 406, 37, 20);
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4"}));
+		add(comboBox_2);
+
+		JLabel lblToken = new JLabel("Token :");
+		lblToken.setBounds(350, 251, 63, 20);
+		lblToken.setForeground(Color.WHITE);
+		add(lblToken);
+
+		JLabel lblGameMode = new JLabel("Game Mode :");
+		lblGameMode.setBounds(340, 346, 86, 20);
+		lblGameMode.setForeground(Color.WHITE);
+		add(lblGameMode);
+
+		JLabel lblNrPlayers = new JLabel("Nr Players");
+		lblNrPlayers.setBounds(340, 408, 71, 17);
+		lblNrPlayers.setForeground(Color.WHITE);
+		add(lblNrPlayers);
+
+		JSeparator separator = new JSeparator();
+		separator.setBounds(301, 320, 193, 8);
+		add(separator);
+
+		ButtonsConfiguration();
+
 	}
 
-	/** * Print images */
+	/**
+	 * Print images */
 	protected void paintComponent(Graphics g){
 		requestFocus(true);
 		setFocusable(true);
 		g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), Color.WHITE, null);
 	}
-	
-	public void ButtonsAndOtherElements(){
-		btnNewButton = new JButton("Menu");
-		btnNewButton.setBackground(new Color(255, 51, 51));
-		btnNewButton.setBounds(710, 616, 106, 37);
-		add(btnNewButton);
-		
-		txtName = new JTextField();
-		txtName.setText("Name");
-		txtName.setBounds(211, 167, 86, 20);
-		add(txtName);
-		txtName.setColumns(10);
-		
-		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Dog", "Ship", "Hat", "Car"}));
-		comboBox.setBounds(211, 210, 86, 20);
-		add(comboBox);
-		
-		separator = new JSeparator();
-		separator.setBounds(164, 272, 196, 2);
-		add(separator);
-		
-		comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Against PC", "Pass'n'Play", "Network Mode"}));
-		comboBox_1.setBounds(211, 307, 86, 20);
-		add(comboBox_1);
-		
-		btnNewButton_1 = new JButton("PLAY !\r\n");
-		btnNewButton_1.setBackground(new Color(255, 51, 51));
-		btnNewButton_1.setBounds(206, 424, 106, 62);
-		add(btnNewButton_1);
+
+	public void ButtonsConfiguration(){
+
+		//Menu button
+		//Returns to the main menu
+		btnNewButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				getRootPane().setContentPane(new MenuPanel());
+			}
+		});
+
+		//Play button
+		//Begins a new game
+		btnNewButton_1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String mode = comboBox_1.getActionCommand();
+				int np = comboBox_2.getComponentCount();
+				Player[] players = new Player[np];
+
+				//associates players to their information
+				players[0] = new Player(txtName.getText(), comboBox.getActionCommand());
+
+				if(np==2){
+					players[1] = new Player("Player 2", "iron");
+				}else if(np == 3){
+					players[2] = new Player("Player 3", "shoe");
+				}else if(players.length == 4){
+					players[2] = new Player("Player 4", "thimble");
+				}
+
+				GameFrame panel = new GameFrame(players, mode);
+
+				getRootPane().setContentPane(panel);
+			}
+		});
+
 	}
 }
