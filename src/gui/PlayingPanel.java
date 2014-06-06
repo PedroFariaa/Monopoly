@@ -10,6 +10,11 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import logic.Player;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class PlayingPanel extends JPanel {
 
@@ -17,27 +22,40 @@ public class PlayingPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private BufferedImage background;
 
 	/**
 	 * Create the panel.
 	 */
 	public PlayingPanel(Player[] players, String mode) {
-		setForeground(new Color(153, 0, 0));
-
-		try {
-			background= ImageIO.read(new File("src/Images/fundo.jpg")) ;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		setBackground(new Color(0, 153, 51));
+		setForeground(Color.WHITE);
 
 		//monopoly=new MonopolyLogic(players , mode);
 
-		setSize(575,671);
+		setSize(264,671);
 		setVisible(true);
 		setFocusable(true);
-
+		setLayout(null);
+		
+		JButton btnRollDice = new JButton("Roll Dice");
+		btnRollDice.setBounds(74, 58, 91, 38);
+		add(btnRollDice);
+		
+		JButton btnBuy = new JButton("Buy");
+		btnBuy.setBounds(74, 131, 91, 38);
+		add(btnBuy);
+		
+		JButton btnMortgageUnmortgage = new JButton("Mortgage / Unmortgage");
+		btnMortgageUnmortgage.setBounds(37, 216, 171, 73);
+		add(btnMortgageUnmortgage);
+		
+		JButton btnEndTurn = new JButton("End Turn");
+		btnEndTurn.setBounds(63, 332, 116, 53);
+		add(btnEndTurn);
+		
+		JButton btnExitGame = new JButton("Exit Game");
+		btnExitGame.setBounds(99, 570, 91, 37);
+		add(btnExitGame);
 		setupButtons();
 	}
 
@@ -49,17 +67,4 @@ public class PlayingPanel extends JPanel {
 	public void setupButtons(){
 
 	}
-
-	/**
-	 * Print images
-	 */
-	protected void paintComponent(Graphics g){
-		requestFocus(true);
-		setFocusable(true);
-		int height=this.getHeight();
-		int width=this.getWidth();
-
-		g.drawImage(background, 0, 0, width, height, Color.WHITE, null);
-	}
-
 }

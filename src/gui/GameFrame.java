@@ -22,21 +22,27 @@ public class GameFrame extends JFrame {
 	 */
 	public GameFrame(Player[] players, String mode){
 		
-		setIconImage(Toolkit.getDefaultToolkit().getImage(GameFrame.class.getResource("/Images/initial.jpg")));
-		
 		setResizable(false);
 		setTitle("Monopoly Java");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setSize(1200,700);
-		/*
-		Dimension dim=Toolkit.getDefaultToolkit().getScreenSize();
-		setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
-*/
 		
 		board = new BoardPanel();
+		board.setSize(671, 671);
 		playingPanel = new PlayingPanel(players, mode);
+		playingPanel.setSize(264,671);
 		playersPanel = new PlayersPanel(players, mode);
+		playersPanel.setSize(265,671);
+		getContentPane().setLayout(null);
+		
+		getContentPane().add(board);
+		getContentPane().add(playersPanel);
+		getContentPane().add(playingPanel);
+		
+		board.setLocation(265, 0);
+		playersPanel.setLocation(0, 0);
+		playingPanel.setLocation(936, 0);
 	}
 
 

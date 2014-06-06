@@ -20,8 +20,10 @@ public class BoardPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public BoardPanel(){
+		setSize(671,671);
+		
 		try {
-			boardImage= ImageIO.read(new File("src/Images/board.jpg")) ;
+			boardImage= ImageIO.read(new File("src/images/board.jpg")) ;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

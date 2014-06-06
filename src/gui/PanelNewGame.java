@@ -146,8 +146,8 @@ public class PanelNewGame extends JPanel {
 				}
 
 				GameFrame panel = new GameFrame(players, mode);
-
-				getRootPane().setContentPane(panel);
+				panel.setVisible(true);
+				
 			}
 		});
 
