@@ -1,8 +1,10 @@
 package gui;
 
-import java.awt.Toolkit;
+import java.util.Vector;
 
 import javax.swing.JFrame;
+
+import logic.Game;
 import logic.Player;
 
 public class GameFrame extends JFrame {
@@ -14,13 +16,16 @@ public class GameFrame extends JFrame {
 	private BoardPanel board;
 	private PlayingPanel playingPanel;
 	private PlayersPanel playersPanel;
+	Game g;
 
 	/**
 	 * Creates the Frame
 	 * @param mode
 	 * @param players
 	 */
-	public GameFrame(Player[] players, String mode){
+	public GameFrame(Vector<Player> players, String mode){
+		
+		g = new Game(mode, players);
 		
 		setResizable(false);
 		setTitle("Monopoly Java");
@@ -30,9 +35,9 @@ public class GameFrame extends JFrame {
 		
 		board = new BoardPanel();
 		board.setSize(671, 671);
-		playingPanel = new PlayingPanel(players, mode);
+		playingPanel = new PlayingPanel(g);
 		playingPanel.setSize(264,671);
-		playersPanel = new PlayersPanel(players, mode);
+		playersPanel = new PlayersPanel(g);
 		playersPanel.setSize(265,671);
 		getContentPane().setLayout(null);
 		

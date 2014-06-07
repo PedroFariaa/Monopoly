@@ -2,9 +2,7 @@ package logic;
 
 
 public class Go extends Space {
-
 	public Go(){
-		
 	}
 	
 	@Override
@@ -17,6 +15,12 @@ public class Go extends Space {
 	@Override
 	public boolean getMortgage() {
 		return false;
+	}
+
+	@Override
+	public void Buy(Player p) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

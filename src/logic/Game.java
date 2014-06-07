@@ -6,7 +6,7 @@ import logic.Space;
 
 public class Game {
 	private Vector<Player> players;
-	private Vector<Space> board;
+	private Vector<Space> board = new Vector<Space>();
 	private String tipo;
 
 	public void setBoard(Vector<Space> board) {
@@ -29,12 +29,15 @@ public class Game {
 		this.players = players;
 	}
 
-	public Game(String tipo, int n_players){
+	public Game(String tipo, Vector<Player> players){
 		//constroi boarduleiro
 		//inicializa os jogadores
-		PlayGamePC(n_players);
-		PlayGamePlayers(n_players);
-		PlayGameRede();
+		this.board = Board();
+		this.tipo=tipo;
+		this.players = players;
+		/*PlayGamePC(players);
+		PlayGamePlayers(players);
+		PlayGameRede();*/
 	}
 
 	private void PlayGameRede() {

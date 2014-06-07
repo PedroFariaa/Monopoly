@@ -19,4 +19,10 @@ public class GoToJail extends Space {
 		return false;
 	}
 
+	@Override
+	public void Buy(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

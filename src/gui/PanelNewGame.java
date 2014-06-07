@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.swing.JButton;
 
@@ -132,17 +133,17 @@ public class PanelNewGame extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String mode = comboBox_1.getActionCommand();
 				int np = comboBox_2.getComponentCount();
-				Player[] players = new Player[np];
+				Vector<Player> players = new Vector<Player> ();
 
 				//associates players to their information
-				players[0] = new Player(txtName.getText(), comboBox.getActionCommand());
+				players.add(new Player(txtName.getText(), comboBox.getActionCommand()));
 
 				if(np==2){
-					players[1] = new Player("Player 2", "iron");
+					players.add(new Player("Player 2", "iron"));
 				}else if(np == 3){
-					players[2] = new Player("Player 3", "shoe");
-				}else if(players.length == 4){
-					players[2] = new Player("Player 4", "thimble");
+					players.add(new Player("Player 3", "shoe"));
+				}else if(np == 4){
+					players.add(new Player("Player 4", "thimble"));
 				}
 
 				GameFrame panel = new GameFrame(players, mode);
