@@ -5,6 +5,7 @@ public class Property extends Space {
 	private String name;
 	private String color;
 	private int price;
+	private int apart_price;
 	private boolean owned;
 	private Player owner;
 	private int normalRent;
@@ -19,7 +20,7 @@ public class Property extends Space {
 	private boolean mortgage=false;
 	
 	
-	public Property(String name, String color, int price, int normalRent, int OneRent, int TwoRent, int ThreeRent, int FourRent, int HotelRent){
+	public Property(String name, String color, int price, int normalRent, int OneRent, int TwoRent, int ThreeRent, int FourRent, int HotelRent, int apart_price){
 		this.name=name;
 		this.color = color;
 		this.price=price;
@@ -30,6 +31,7 @@ public class Property extends Space {
 		this.FourRent=FourRent;
 		this.HotelRent=HotelRent;
 		this.mortgage=false;
+		this.apart_price=apart_price;
 	}
 	
 	public String getColor() {

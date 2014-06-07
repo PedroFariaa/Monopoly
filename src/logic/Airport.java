@@ -9,11 +9,11 @@ public class Airport extends Space {
 	private int rent;
 	private boolean mortgage = false;
 	
-	public Airport(int price, int rent){
+	public Airport(int price){
 		this.price=price;
 		this.owned=false;
 		this.owner=null;
-		this.rent=rent;
+		this.rent=25;
 		this.mortgage=false;
 	}
 	
