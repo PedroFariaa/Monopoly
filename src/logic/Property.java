@@ -1,6 +1,5 @@
 package logic;
 
-
 public class Property extends Space {
 	private String name;
 	private String color;
@@ -18,6 +17,7 @@ public class Property extends Space {
 	private int n_apart;
 	private int n_hotel;
 	private boolean mortgage=false;
+	private double mortgageValue;
 	
 	
 	public Property(String name, String color, int price, int normalRent, int OneRent, int TwoRent, int ThreeRent, int FourRent, int HotelRent, int apart_price){
@@ -31,7 +31,8 @@ public class Property extends Space {
 		this.FourRent=FourRent;
 		this.HotelRent=HotelRent;
 		this.mortgage=false;
-		this.apart_price=apart_price;
+		this.setApart_price(apart_price);
+		this.mortgageValue=price/2;
 	}
 	
 	public String getColor() {
@@ -53,19 +54,25 @@ public class Property extends Space {
 		this.owned = owned;
 	}
 	
-	
+	/**
+	 * always a player stands on a property, checks if it is already bought.
+	 * In this case the player must pay a rent to his owner
+	 */
 	@Override
 	public void Action(Player p) {
 		if(this.owned){
 			if(this.owner != p){
-				p.removeMoney(this.getRent());
-				this.owner.addMoney(this.getRent());
+				if(!getMortgage()){
+					p.removeMoney(this.getRent());
+					this.owner.addMoney(this.getRent());
+				}
 			}
-		}else{
-			this.Buy(p);
 		}
 	}
 	
+	/**
+	 * Allow the player to Buy the property
+	 */
 	public void Buy(Player p){
 		if(p.getMoney() > this.getPrice()){
 			p.removeMoney(this.price);
@@ -75,7 +82,11 @@ public class Property extends Space {
 		}
 	}
 	
-	private int getRent() {
+	/**
+	 * Calculates the rent that players must pay
+	 * @return value of the rent according to the building it was on it
+	 */
+	public int getRent() {
 		int newrent = 0;
 		if(!this.getMortgage()){
 			if(this.n_apart==0 && this.n_hotel==0){
@@ -96,6 +107,9 @@ public class Property extends Space {
 		return newrent;
 	}
 	
+	/**
+	 * Adds a building to the property
+	 */
 	public void addBuild(){
 		if(n_hotel != 1){
 			if(n_apart==4){
@@ -107,6 +121,9 @@ public class Property extends Space {
 		}	
 	}
 	
+	/**
+	 * Removes a building from the property
+	 */
 	public void removeBuild(){
 		if(n_apart > 0 || n_hotel == 1){
 			if(n_hotel==1){
@@ -150,5 +167,41 @@ public class Property extends Space {
 	@Override
 	public boolean getMortgage() {
 		return this.mortgage;
+	}
+
+	/**
+	 * Mortgages the property
+	 */
+	public void Mortgage(Player p){
+		setMortgage(true);
+		p.addMoney((int)mortgageValue);
+	}
+
+	/**
+	 * Unmortgages the property
+	 */
+	public void Unmortgage(Player p){
+		setMortgage(false);
+		p.removeMoney((int) mortgageValue);
+	}
+	
+	private void setMortgage(boolean b) {
+		this.mortgage=b;
+	}
+
+	public double getMortgageValue() {
+		return mortgageValue;
+	}
+
+	public void setMortgageValue(double mortgageValue) {
+		this.mortgageValue = mortgageValue;
+	}
+
+	public int getApart_price() {
+		return apart_price;
+	}
+
+	public void setApart_price(int apart_price) {
+		this.apart_price = apart_price;
 	}
 }

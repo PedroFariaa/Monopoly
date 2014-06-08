@@ -8,7 +8,9 @@ public class FreeParking extends Space {
 	}
 	
 	@Override
-	// Actually do nothing
+	/**
+	 * Actually does nothing
+	 */
 	public void Action(Player p) {
 		
 	}
@@ -20,8 +22,16 @@ public class FreeParking extends Space {
 
 	@Override
 	public void Buy(Player p) {
-		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void Mortgage(Player p) {
+		
+	}
+
+	@Override
+	public void Unmortgage(Player p) {
 	}
 
 }

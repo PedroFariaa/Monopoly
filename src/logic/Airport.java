@@ -8,6 +8,10 @@ public class Airport extends Space {
 	//the rent paid is equal to number of airports that the owner has * rent
 	private int rent;
 	private boolean mortgage = false;
+	/**
+	 * mortgage value of a certain airport
+	 */
+	private double mortgageValue;
 	
 	public Airport(int price){
 		this.price=price;
@@ -15,6 +19,7 @@ public class Airport extends Space {
 		this.owner=null;
 		this.rent=25;
 		this.mortgage=false;
+		this.mortgageValue=price/2;
 	}
 	
 	@Override
@@ -40,6 +45,11 @@ public class Airport extends Space {
 		}
 	}
 
+	/**
+	 * Allow the player p to Buy the airport where he stands
+	 * 
+	 * @param p player who is buying
+	 */
 	public void Buy(Player p){
 		if(!this.getOwned()){
 			if(p.getMoney() > this.getPrice()){
@@ -86,6 +96,28 @@ public class Airport extends Space {
 	@Override
 	public boolean getMortgage() {
 		return this.mortgage;
+	}
+	
+	public void Mortgage(Player p){
+		setMortgage(true);
+		p.addMoney((int)mortgageValue);
+	}
+
+	public void Unmortgage(Player p){
+		setMortgage(false);
+		p.removeMoney((int) mortgageValue);
+	}
+	
+	private void setMortgage(boolean b) {
+		this.mortgage=b;
+	}
+
+	public double getMortgageValue() {
+		return mortgageValue;
+	}
+
+	public void setMortgageValue(double mortgageValue) {
+		this.mortgageValue = mortgageValue;
 	}
 
 }

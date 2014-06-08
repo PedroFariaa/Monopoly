@@ -1,13 +1,29 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import logic.Space;
 
-public class Game {
+public class Game implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	/**
+	 * Vector of players playing in this board
+	 */
 	private Vector<Player> players;
+	/**
+	 * Vector of Spaces on the board
+	 */
 	private Vector<Space> board = new Vector<Space>();
+	/**
+	 * Game mode
+	 */
 	private String tipo;
+	/**
+	 * indicator of the player playing at this time
+	 */
+	public int i=0;
 
 	public void setBoard(Vector<Space> board) {
 		this.board = board;
@@ -16,7 +32,7 @@ public class Game {
 	public Vector<Space> getBoard() {
 		return board;
 	}
-		
+
 	public Vector<Player> getPlayers() {
 		return players;
 	}
@@ -26,29 +42,11 @@ public class Game {
 	}
 
 	public Game(String tipo, Vector<Player> players){
-		//constroi boarduleiro
+		//constroi tabuleiro
 		//inicializa os jogadores
 		this.board = Board();
 		this.tipo=tipo;
 		this.players = players;
-		/*PlayGamePC(players);
-		PlayGamePlayers(players);
-		PlayGameRede();*/
-	}
-
-	private void PlayGameRede() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void PlayGamePlayers(int n_players) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void PlayGamePC(int n_players) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public String getTipo() {
@@ -58,17 +56,22 @@ public class Game {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
+
 	public Game() {
 		this.board = Board();
 		players = Players();
 	}
 
 	private Vector<Player> Players() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Initializes the board with all the spaces by order
+	 * the spaces already have all the information that they need
+	 * 
+	 * @return ready board
+	 */
 	private Vector<Space> Board() {
 		Space space0 = new Go();
 		board.add(space0);
@@ -92,7 +95,7 @@ public class Game {
 		board.add(space9);
 		Jail space10 = new Jail();
 		board.add(space10);
-		
+
 		Property space11 = new Property("SANTAREM","PINK", 140, 10, 50, 150, 450, 625, 750, 100);
 		board.add(space11);
 		Companies space12 = new Companies(150);
@@ -113,7 +116,7 @@ public class Game {
 		board.add(space19);
 		FreeParking space20 = new FreeParking();
 		board.add(space20);
-		
+
 		Property space21 = new Property("EVORA","RED", 220, 18, 90, 250, 700, 875, 1050, 150);
 		board.add(space21);
 		Chance space22 = new Chance();
@@ -133,8 +136,8 @@ public class Game {
 		Property space29 = new Property("PORTO BOAVISTA","YELLOW", 280, 24, 120, 360, 850, 1025, 1200, 150);
 		board.add(space29);
 		GoToJail space30 = new GoToJail();
-		board.add(space20);
-		
+		board.add(space30);
+
 		Property space31 = new Property("LISBOA EXPO","GREEN", 300, 26, 130, 390, 900, 1100, 1275, 200);
 		board.add(space31);
 		Property space32 = new Property("MADEIRA","GREEN", 300, 26, 130, 390, 900, 1100, 1275, 200);
@@ -155,5 +158,135 @@ public class Game {
 		board.add(space39);
 
 		return this.board;
+	}
+
+	/**
+	 * Passes the turn to the next player on the vector
+	 */
+	public void EndTurn(){
+		getPlayers().get(i).updateWorth();
+		Winner();
+		if(i<getPlayers().size() -1)
+			i++;
+		else
+			i=0;
+	}
+
+	/**
+	 * buys the property where the player is standing
+	 */
+	public void Buy(){
+		getBoard().get(getPlayers().get(i).getPosition()).Buy(getPlayers().get(i));
+	}
+
+	
+	/**
+	 * /**
+	 * Add a building (apartment) to a certain Property
+	 * 
+	 * @param s property where it will be built
+	 * @param n_builds number of building that will be added to that property
+	 * @return true if the property can be built in, and false if it can not
+	 */
+	public boolean AddBuild(Property s, int n_builds){
+		Player owner = s.getOwner();
+		boolean canBuild=false;
+		for(int b=0; b<Board().size(); b++){
+			if(((Property) getBoard().get(b)).getColor()==s.getColor()){
+				if(((Property) getBoard().get(b)).getOwner()==owner){
+					canBuild=true;
+				}else{
+					canBuild=false;
+				}
+			}
+		}
+		if(canBuild){
+			for(int a=0; a<n_builds; a++){
+				s.addBuild();
+			}
+		}
+		return canBuild;
+	}
+	
+
+	/**
+	 * Removes a building (apartment) of a certain Property
+	 * 
+	 * @param s property where the buildings will be demolished
+	 * @param n_builds number of building that will be demolished from a property
+	 */
+	public void RemoveBuild(Property s, int n_builds){
+		for(int a=0; a<n_builds; a++){
+			s.removeBuild();
+		}
+	}
+
+	/**
+	 * Allows to mortgage a Airport, company or property
+	 * 
+	 * @param s space that you want to mortgage
+	 */
+	public void Mortgage(Space s){
+		s.Mortgage(Players().get(i));
+	}
+
+	/**
+	 * Allows to unmortgage a Airport, company or property
+	 * 
+	 * @param s space that you want to unmortgage
+	 */
+	public void Unmortgage(Space s){
+		s.Unmortgage(Players().get(i));
+	}
+
+	/**
+	 * Rolls the dice and moves the player to the right position
+	 */
+	public int[] RollDice(){
+		int[] res;
+		res = players.get(i).RollDice();
+		return res;
+	}
+
+	/**
+	 * When in jail, the player can pays to leave
+	 */
+	public void JailPays(){
+		players.get(i).removeMoney(50);
+		players.get(i).setArested_time(0);
+	}
+
+	/**
+	 * When in jail, if the player chooses not to pay, e can try to have a double to be set free
+	 */
+	public void JailTriesDouble(){
+		int move1 = (int)(Math.random() * 6+1);
+		int move2 = (int)(Math.random() * 6+1);
+		if(move1==move2){
+			players.get(i).setArested_time(0);
+		}
+		else{
+			players.get(i).setArested_time(players.get(i).getArested_time()-1);
+		}
+	}
+
+	/**
+	 * verifies is the game has ended
+	 * @return the player who won the game
+	 */
+	public Player Winner(){
+		int number_Active_Players=0;
+		Player pw=null;
+		for(int a=0; a<getPlayers().size(); a++){
+			if(getPlayers().get(a).getAlive()==true){
+				number_Active_Players++;
+				pw=getPlayers().get(a);
+			}
+		}
+		if(number_Active_Players==1){
+			return pw;
+		}else{
+			return null;
+		}
 	}
 }

@@ -9,7 +9,10 @@ public class Player {
 	private int previous_position;
 	private int money;
 	private int arested_time;
-	private Vector<Space> ownproperties;
+	private Vector<Space> ownproperties = new Vector<Space> ();
+	/**
+	 * money + price of his properties
+	 */
 	private int worth;
 	// false is the player has already lost
 	private boolean alive;
@@ -58,12 +61,23 @@ public class Player {
 	public void setMoney(int money) {
 		this.money = money;
 	}
+	/**
+	 * Gives money to the player
+	 * @param money amount of money that is given
+	 */
 	public void addMoney(int money){
 		this.money = this.money + money;
 	}
+	/**
+	 * Takes money from the player
+	 * @param money amount of money that is taken
+	 */
 	public void removeMoney(int money){
 		if(this.getMoney() > money){
 			this.money = this.money - money;
+		}else{
+			this.money=0;
+			this.setAlive(false);
 		}
 	}
 	//properties related methods
@@ -73,9 +87,18 @@ public class Player {
 	public void setOwnproperties(Vector<Space> ownproperties) {
 		this.ownproperties = ownproperties;
 	}
+	/**
+	 * Adds a Property to the player
+	 * @param property property that is given
+	 */
 	public void addOwnproperties(Space property){
 		this.ownproperties.add(property);
 	}
+	/**
+	 * Removes a property from a player
+	 * @param property property that is taken
+	 * @return
+	 */
 	public boolean removeOwnproperties(Space property){
 		if(this.ownproperties.contains(property)){
 			this.ownproperties.remove(property);
@@ -90,21 +113,16 @@ public class Player {
 	public void setWorth(int worth) {
 		this.worth = worth;
 	}
+	
+	/**
+	 * Checks if the player passes through the start, if he does, receives 200$
+	 */
 	public void PassThroughStart(){
 		if(this.getPosition() < this.getPrevious_position()){
 			this.addMoney(200);
 		}
 	}
-		
 	
-	/*
-	public boolean Mortage(){
-		return false;
-	}
-	public boolean Unmortgage(){
-		return false;
-	}
-	*/
 	public boolean getAlive() {
 		return alive;
 	}
@@ -118,10 +136,6 @@ public class Player {
 		this.previous_position = previous_position;
 	}
 	
-	public void addBuild(){
-		//TODO
-	}
-	
 	public int getArested_time() {
 		return arested_time;
 	}
@@ -129,7 +143,12 @@ public class Player {
 		this.arested_time = arested_time;
 	}
 
-	public boolean RollDice(){
+	/**
+	 * allow the player to roll the dices and move to a different space
+	 * 
+	 * @return faces of the both dices
+	 */
+	public int[] RollDice(){
 		int move1 = (int)(Math.random() * 6+1);
 		int move2 = (int)(Math.random() * 6+1);
 		if(move1==move2){
@@ -137,17 +156,14 @@ public class Player {
 		}else{
 			ddice = false;
 		}
-		if(this.getArested_time() == 0 || ddice==true){
+		if(this.getArested_time() == 0){
 			this.setPrevious_position(this.position);
 			this.setPosition(this.getPosition()+move1+move2);
 		}
 		
 		this.PassThroughStart();
 		
-		if(move1==move2)
-			return true;
-		else
-			return false;
+		 return new int[]{move1, move2};
 	}
 
 	public String getName() {
@@ -161,5 +177,20 @@ public class Player {
 	}
 	public void setDdice(boolean ddice) {
 		this.ddice = ddice;
+	}
+	
+	/**
+	 * Updates the worth of the player.
+	 * This increased and decreases according with his money and his properties
+	 */
+	public void updateWorth(){
+		int amount;
+		amount=getMoney();
+		for(int a=0; a<getOwnproperties().size(); a++){
+			amount += ((Property) getOwnproperties().get(a)).getPrice();
+			amount += ((Airport) getOwnproperties().get(a)).getPrice();
+			amount += ((Companies) getOwnproperties().get(a)).getPrice();
+		}
+		setWorth(amount);
 	}
 }

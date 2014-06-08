@@ -8,6 +8,9 @@ public class GoToJail extends Space {
 	}
 	
 	@Override
+	/**
+	 * Changes the Player's position to the Jail and arrests him
+	 */
 	public void Action(Player p) {
 		p.setPosition(10);
 		p.setPrevious_position(30);
@@ -21,7 +24,16 @@ public class GoToJail extends Space {
 
 	@Override
 	public void Buy(Player p) {
-		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Mortgage(Player p) {
+		
+	}
+
+	@Override
+	public void Unmortgage(Player p) {
 		
 	}
 

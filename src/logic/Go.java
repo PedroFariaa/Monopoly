@@ -6,10 +6,11 @@ public class Go extends Space {
 	}
 	
 	@Override
+	/**
+	 * if the player stands here he receives 200$
+	 */
 	public void Action(Player p) {
-		if(p.getPrevious_position() > p.getPosition()){
-			p.addMoney(200);
-		}
+		p.addMoney(200);
 	}
 
 	@Override
@@ -19,7 +20,16 @@ public class Go extends Space {
 
 	@Override
 	public void Buy(Player p) {
-		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Mortgage(Player p) {
+		
+	}
+
+	@Override
+	public void Unmortgage(Player p) {
 		
 	}
 
