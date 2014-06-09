@@ -1,7 +1,15 @@
 package logic;
 
-public class Community extends Space {
+import java.io.Serializable;
+
+public class Community extends Space implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private int lastCard;
+	
+	public Community(int position){
+		this.position=position;
+	}
 	
 	/**
 	 * generates a random community card to be attributed to the player p
@@ -52,6 +60,11 @@ public class Community extends Space {
 	@Override
 	public void Unmortgage(Player p) {
 		
+	}
+
+	@Override
+	public String getClassName() {
+		return "Community";
 	}
 
 }

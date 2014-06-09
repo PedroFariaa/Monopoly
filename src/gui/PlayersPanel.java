@@ -1,272 +1,414 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JPanel;
-
-import logic.Game;
-import logic.Player;
-
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JTextPane;
+import java.awt.SystemColor;
+import java.util.Vector;
+import logic.Player;
 import javax.swing.ImageIcon;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 
-public class PlayersPanel extends JPanel {
+public class PlayersPanel extends JPanel{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	Game g;
-	JButton btnProperties, button, button_1, button_2;
+	private BufferedImage background;
+	private JLabel lblPlayer1name;
+	private JLabel lblCash;
+	private JLabel lblAmountProperties;
+	private JLabel lblAmountBuilings;
+	private JLabel lblCashP1;
+	private JLabel lblPropP1;
+	private JLabel lblBuildP1;
+	private JLabel tokenP1;
+	private JLabel lblPlayer2name;
+	private JLabel lblBuildP2;
+	private JLabel tokenP2;
+	private JLabel lblCash2;
+	private JLabel lblAmoutProperties2;
+	private JLabel lblCashP2;
+	private JLabel lblAmountBuildings2;
+	private JLabel lblPropP2;
+	private JLabel tokenP3;
+	private JLabel lblPlayerName3;
+	private JLabel lblCash3;
+	private JLabel lblAmountProperties3;
+	private JLabel lblAmountBuildings3;
+	private JLabel lblBuildP3;
+	private JLabel lblPropP3;
+	private JLabel lblCashP3;
+	private JLabel lblPlayerName4;
+	private JLabel tokenP4;
+	private JLabel lblCash4;
+	private JLabel lblAmoutProperties4;
+	private JLabel lblAmountBuildings4;
+	private JLabel lblBuildP4;
+	private JLabel lblPropP4;
+	private JLabel lblCashP4;
+	private JLabel lblPosition1;
+	private JLabel lblPosP1;
+	private JLabel lblPosition2;
+	private JLabel lblPosP2;
+	private JLabel lblPosition3;
+	private JLabel lblPosP3;
+	private JLabel lblPosition4;
+	private JLabel lblPosP4;
 
-	
-	/**
-	 * Create the panel.
-	 */
-	public PlayersPanel(Game g){
-		
-		this.g=g;
-		
-		setBackground(new Color(0, 153, 51));
+	private Vector<Player> players;
+
+
+	public PlayersPanel(Vector<Player> vector){
+
+		this.players = vector;
+
+		setBackground(new Color(102,204,102));
 		setForeground(Color.WHITE);
 
-		setSize(265, 671);
+		setSize(575, 212);
+
+
+		lblPlayer1name = new JLabel("Player1Name");
+		lblPlayer1name.setBounds(10, 71, 63, 14);
+		lblPlayer1name.setForeground(new Color(0, 0, 0));
+
+		lblCash = new JLabel("Cash:");
+		lblCash.setBounds(91, 11, 109, 14);
+		lblCash.setForeground(new Color(0, 0, 0));
+
+		lblAmountProperties = new JLabel("Amount Properties:");
+		lblAmountProperties.setBounds(91, 31, 109, 14);
+		lblAmountProperties.setForeground(new Color(0, 0, 0));
+
+		lblAmountBuilings = new JLabel("Amount Buildings: ");
+		lblAmountBuilings.setBounds(91, 51, 109, 19);
+		lblAmountBuilings.setForeground(new Color(0, 0, 0));
+
+		lblCashP1 = new JLabel("CashP1");
+		lblCashP1.setBounds(194, 11, 36, 14);
+		lblCashP1.setForeground(new Color(0, 0, 0));
+
+		lblPropP1 = new JLabel("PropP1");
+		lblPropP1.setBounds(194, 31, 34, 14);
+		lblPropP1.setForeground(new Color(0, 0, 0));
+
+		lblBuildP1 = new JLabel("BuildP1");
+		lblBuildP1.setBounds(194, 51, 34, 14);
+		lblBuildP1.setForeground(new Color(0, 0, 0));
+
+		tokenP1 = new JLabel("");
+		tokenP1.setBounds(10, 11, 48, 47);
+
+		lblPlayer2name = new JLabel("Player2Name");
+		lblPlayer2name.setBounds(10, 173, 63, 14);
+		lblPlayer2name.setForeground(new Color(0, 0, 0));
+
+		lblBuildP2 = new JLabel("BuildP2");
+		lblBuildP2.setBounds(194, 153, 34, 14);
+		lblBuildP2.setForeground(new Color(0, 0, 0));
+
+		tokenP2 = new JLabel("");
+		tokenP2.setBounds(10, 113, 48, 47);
+
+		lblCash2 = new JLabel("Cash:");
+		lblCash2.setBounds(91, 113, 109, 14);
+		lblCash2.setForeground(new Color(0, 0, 0));
+
+		lblAmoutProperties2 = new JLabel("Amount Properties:");
+		lblAmoutProperties2.setBounds(91, 133, 109, 14);
+		lblAmoutProperties2.setForeground(new Color(0, 0, 0));
+
+		lblCashP2 = new JLabel("CashP2");
+		lblCashP2.setBounds(194, 113, 36, 14);
+		lblCashP2.setForeground(new Color(0, 0, 0));
+
+		lblAmountBuildings2 = new JLabel("Amount Buildings: ");
+		lblAmountBuildings2.setBounds(91, 153, 109, 19);
+		lblAmountBuildings2.setForeground(new Color(0, 0, 0));
+
+		lblPropP2 = new JLabel("PropP2");
+		lblPropP2.setBounds(194, 133, 34, 14);
+		lblPropP2.setForeground(new Color(0, 0, 0));
+
+		tokenP3 = new JLabel("");
+		tokenP3.setBounds(308, 11, 48, 47);
+
+		lblPlayerName3 = new JLabel("Player3Name");
+		lblPlayerName3.setBounds(308, 71, 63, 14);
+		lblPlayerName3.setForeground(Color.WHITE);
+
+		lblCash3 = new JLabel("Cash:");
+		lblCash3.setBounds(389, 11, 97, 14);
+		lblCash3.setForeground(Color.WHITE);
+
+		lblAmountProperties3 = new JLabel("Amount Properties:");
+		lblAmountProperties3.setBounds(389, 31, 97, 14);
+		lblAmountProperties3.setForeground(Color.WHITE);
+
+		lblAmountBuildings3 = new JLabel("Amount Buildings: ");
+		lblAmountBuildings3.setBounds(389, 51, 97, 19);
+		lblAmountBuildings3.setForeground(Color.WHITE);
+
+		lblBuildP3 = new JLabel("BuildP3");
+		lblBuildP3.setBounds(492, 51, 34, 14);
+		lblBuildP3.setForeground(Color.WHITE);
+
+		lblPropP3 = new JLabel("PropP3");
+		lblPropP3.setBounds(492, 31, 34, 14);
+		lblPropP3.setForeground(Color.WHITE);
+
+		lblCashP3 = new JLabel("CashP3");
+		lblCashP3.setBounds(492, 11, 36, 14);
+		lblCashP3.setForeground(Color.WHITE);
+
+		lblPlayerName4 = new JLabel("Player4Name");
+		lblPlayerName4.setBounds(308, 173, 63, 14);
+		lblPlayerName4.setForeground(Color.WHITE);
+
+		tokenP4 = new JLabel("");
+		tokenP4.setBounds(308, 113, 48, 47);
+
+		lblCash4 = new JLabel("Cash:");
+		lblCash4.setBounds(389, 113, 97, 14);
+		lblCash4.setForeground(Color.WHITE);
+
+		lblAmoutProperties4 = new JLabel("Amount Properties:");
+		lblAmoutProperties4.setBounds(389, 133, 97, 14);
+		lblAmoutProperties4.setForeground(Color.WHITE);
+
+		lblAmountBuildings4 = new JLabel("Amount Buildings: ");
+		lblAmountBuildings4.setBounds(389, 153, 97, 19);
+		lblAmountBuildings4.setForeground(Color.WHITE);
+
+		lblBuildP4 = new JLabel("BuildP4");
+		lblBuildP4.setBounds(492, 153, 34, 14);
+		lblBuildP4.setForeground(Color.WHITE);
+
+		lblPropP4 = new JLabel("PropP4");
+		lblPropP4.setBounds(492, 133, 34, 14);
+		lblPropP4.setForeground(Color.WHITE);
+
+		lblCashP4 = new JLabel("CashP4");
+		lblCashP4.setBounds(492, 113, 36, 14);
+		lblCashP4.setForeground(Color.WHITE);
+
+		lblPosition1 = new JLabel("Position:");
+		lblPosition1.setForeground(new Color(0, 0, 0));
+		lblPosition1.setBackground(new Color(153, 0, 0));
+		lblPosition1.setBounds(91, 71, 109, 14);
+
+		lblPosP1 = new JLabel("PosP1");
+		lblPosP1.setForeground(new Color(0, 0, 0));
+		lblPosP1.setBackground(new Color(153, 0, 0));
+		lblPosP1.setBounds(194, 71, 46, 14);
+
+		lblPosP2 = new JLabel("PosP2");
+		lblPosP2.setForeground(new Color(0, 0, 0));
+		lblPosP2.setBackground(new Color(153, 0, 0));
+		lblPosP2.setBounds(194, 173, 46, 14);
+
+		lblPosition2 = new JLabel("Position:");
+		lblPosition2.setForeground(new Color(0, 0, 0));
+		lblPosition2.setBackground(new Color(153, 0, 0));
+		lblPosition2.setBounds(91, 173, 109, 14);
+
+		lblPosP4 = new JLabel("PosP4");
+		lblPosP4.setForeground(Color.WHITE);
+		lblPosP4.setBackground(new Color(153, 0, 0));
+		lblPosP4.setBounds(492, 173, 46, 14);
+
+		lblPosition4 = new JLabel("Position:");
+		lblPosition4.setForeground(Color.WHITE);
+		lblPosition4.setBackground(new Color(153, 0, 0));
+		lblPosition4.setBounds(389, 173, 46, 14);
+
+		lblPosP3 = new JLabel("PosP3");
+		lblPosP3.setForeground(Color.WHITE);
+		lblPosP3.setBackground(new Color(153, 0, 0));
+		lblPosP3.setBounds(492, 71, 46, 14);
+
+		lblPosition3 = new JLabel("Position:");
+		lblPosition3.setForeground(Color.WHITE);
+		lblPosition3.setBackground(new Color(153, 0, 0));
+		lblPosition3.setBounds(389, 71, 46, 14);
+
 		setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(23, 11, 213, 137);
-		add(panel);
-		
-		JLabel lblToken = new JLabel("Token");
-		lblToken.setBounds(146, 11, 57, 54);
-		lblToken.setIcon(new ImageIcon(PlayersPanel.class.getResource("/images/icon.jpg")));
-		
-		btnProperties = new JButton("Properties");
-		btnProperties.setBounds(114, 103, 89, 23);
-		
-		JTextPane txtpnName = new JTextPane();
-		txtpnName.setBounds(10, 11, 37, 20);
-		txtpnName.setText("Name:");
-		
-		JTextPane txtpnPedro = new JTextPane();
-		txtpnPedro.setBounds(20, 32, 73, 20);
-		txtpnPedro.setText("Pedro");
-		
-		JTextPane txtpnCash = new JTextPane();
-		txtpnCash.setBounds(10, 63, 37, 20);
-		txtpnCash.setText("Cash :");
-		
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setBounds(20, 84, 73, 20);
-		textPane_1.setText("1500\r\n");
-		panel.setLayout(null);
-		panel.add(lblToken);
-		panel.add(btnProperties);
-		panel.add(txtpnName);
-		panel.add(txtpnPedro);
-		panel.add(txtpnCash);
-		panel.add(textPane_1);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(null);
-		panel_1.setBounds(23, 170, 213, 137);
-		add(panel_1);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setLayout(null);
-		panel_4.setBounds(0, 0, 213, 137);
-		panel_1.add(panel_4);
-		
-		JLabel label = new JLabel("Token");
-		label.setBounds(146, 11, 57, 54);
-		panel_4.add(label);
-		
-		button = new JButton("Properties");
-		button.setBounds(114, 103, 89, 23);
-		panel_4.add(button);
-		
-		JTextPane textPane = new JTextPane();
-		textPane.setText("Name:");
-		textPane.setBounds(10, 11, 37, 20);
-		panel_4.add(textPane);
-		
-		JTextPane textPane_2 = new JTextPane();
-		textPane_2.setText("asd");
-		textPane_2.setBounds(20, 32, 73, 20);
-		panel_4.add(textPane_2);
-		
-		JTextPane textPane_3 = new JTextPane();
-		textPane_3.setText("Cash :");
-		textPane_3.setBounds(10, 63, 37, 20);
-		panel_4.add(textPane_3);
-		
-		JTextPane textPane_4 = new JTextPane();
-		textPane_4.setText("1500\r\n");
-		textPane_4.setBounds(20, 84, 73, 20);
-		panel_4.add(textPane_4);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setLayout(null);
-		panel_2.setBounds(23, 340, 213, 137);
-		add(panel_2);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setLayout(null);
-		panel_5.setBounds(0, 0, 213, 137);
-		panel_2.add(panel_5);
-		
-		JLabel label_1 = new JLabel("Token");
-		label_1.setBounds(146, 11, 57, 54);
-		panel_5.add(label_1);
-		
-		button_1 = new JButton("Properties");
-		button_1.setBounds(114, 103, 89, 23);
-		panel_5.add(button_1);
-		
-		JTextPane textPane_5 = new JTextPane();
-		textPane_5.setText("Name:");
-		textPane_5.setBounds(10, 11, 37, 20);
-		panel_5.add(textPane_5);
-		
-		JTextPane textPane_6 = new JTextPane();
-		textPane_6.setText("fgh");
-		textPane_6.setBounds(20, 32, 73, 20);
-		panel_5.add(textPane_6);
-		
-		JTextPane textPane_7 = new JTextPane();
-		textPane_7.setText("Cash :");
-		textPane_7.setBounds(10, 63, 37, 20);
-		panel_5.add(textPane_7);
-		
-		JTextPane textPane_8 = new JTextPane();
-		textPane_8.setText("1500\r\n");
-		textPane_8.setBounds(20, 84, 73, 20);
-		panel_5.add(textPane_8);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setLayout(null);
-		panel_3.setBounds(23, 510, 213, 137);
-		add(panel_3);
-		
-		JPanel panel_6 = new JPanel();
-		panel_6.setLayout(null);
-		panel_6.setBounds(0, 0, 213, 137);
-		panel_3.add(panel_6);
-		
-		JLabel label_2 = new JLabel("Token");
-		label_2.setBounds(146, 11, 57, 54);
-		panel_6.add(label_2);
-		
-		button_2 = new JButton("Properties");
-		button_2.setBounds(114, 103, 89, 23);
-		panel_6.add(button_2);
-		
-		JTextPane textPane_9 = new JTextPane();
-		textPane_9.setText("Name:");
-		textPane_9.setBounds(10, 11, 37, 20);
-		panel_6.add(textPane_9);
-		
-		JTextPane textPane_10 = new JTextPane();
-		textPane_10.setText("klp");
-		textPane_10.setBounds(20, 32, 73, 20);
-		panel_6.add(textPane_10);
-		
-		JTextPane textPane_11 = new JTextPane();
-		textPane_11.setText("Cash :");
-		textPane_11.setBounds(10, 63, 37, 20);
-		panel_6.add(textPane_11);
-		
-		JTextPane textPane_12 = new JTextPane();
-		textPane_12.setText("1500\r\n");
-		textPane_12.setBounds(20, 84, 73, 20);
-		panel_6.add(textPane_12);
+		add(lblPlayer1name);
+		add(tokenP1);
+		add(lblCash);
+		add(lblAmountProperties);
+		add(lblAmountBuilings);
+		add(lblPropP1);
+		add(lblCashP1);
+		add(lblBuildP1);
+		add(lblPosition1);
+		add(lblPosP1);
+		add(tokenP2);
+		add(lblCash2);
+		add(lblAmoutProperties2);
+		add(lblAmountBuildings2);
+		add(lblCashP2);
+		add(lblPropP2);
+		add(lblBuildP2);
+		add(lblPlayer2name);
+		add(lblPosP2);
+		add(lblPosition2);
 
-		
-
-		//defines which is the visible information
-		if(g.getPlayers().size()==1){
-			panel.setVisible(true);
-			panel_1.setVisible(false);
-			panel_2.setVisible(false);
-			panel_3.setVisible(false);
-		}else if(g.getPlayers().size()==2){
-			panel.setVisible(true);
-			panel_1.setVisible(true);
-			panel_2.setVisible(false);
-			panel_3.setVisible(false);
-		}else if(g.getPlayers().size()==3){
-			panel.setVisible(true);
-			panel_1.setVisible(true);
-			panel_2.setVisible(true);
-			panel_3.setVisible(false);
-		}else{
-			panel.setVisible(true);
-			panel_1.setVisible(true);
-			panel_2.setVisible(true);
-			panel_3.setVisible(true);
+		if(players.size() > 2){
+			add(tokenP3);
+			add(lblCash3);
+			add(lblAmountProperties3);
+			add(lblCashP3);
+			add(lblPropP3);
+			add(lblBuildP3);
+			add(lblAmountBuildings3);
+			add(lblPlayerName3);
+			add(lblPosP3);
+			add(lblPosition3);
+			if(players.size() > 3){
+				add(tokenP4);
+				add(lblCash4);
+				add(lblAmoutProperties4);
+				add(lblAmountBuildings4);
+				add(lblCashP4);
+				add(lblPropP4);
+				add(lblBuildP4);
+				add(lblPlayerName4);
+				add(lblPosP4);
+				add(lblPosition4);
+			}
 		}
+
+
 	}
-	
-	
+
+
 	/**
-	 * Setup all buttons
+	 * Print images
 	 */
-	public void setupButtons(){
-		//Buttons responsible to show the properties of each player
-		btnProperties.addActionListener(new ActionListener() {
+	protected void paintComponent(Graphics g){
+		requestFocus(true);
+		setFocusable(true);
+		int height=this.getHeight();
+		int width=this.getWidth();
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Player p = g.getPlayers().get(0);
-				p.RollDice();
-				g.getBoard().get(p.getPosition()).Action(p);
-				//TODO
-			}
-		});
-		
-		button.addActionListener(new ActionListener() {
+		g.drawImage(background, 0, 0, width, height, Color.WHITE, null);
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Player p = g.getPlayers().get(0);
-				p.RollDice();
-				g.getBoard().get(p.getPosition()).Action(p);
-				//TODO
-			}
-		});
-		
-		button_1.addActionListener(new ActionListener() {
+		settokens();
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Player p = g.getPlayers().get(0);
-				p.RollDice();
-				g.getBoard().get(p.getPosition()).Action(p);
-				//TODO
-			}
-		});
-		
-		button_2.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Player p = g.getPlayers().get(0);
-				p.RollDice();
-				g.getBoard().get(p.getPosition()).Action(p);
-				//TODO
-			}
-		});
-		
+		setInfoPlayers();
 	}
-	
-	
-	public void repaint(){
-		//TODO change money and properties
+
+	/**
+	 * Set information of Players (cash, properties, buildings and special cards)
+	 */
+	private void setInfoPlayers() {
+
+		//PLAYER 1
+		lblPlayer1name.setText(players.get(0).getName());
+		lblCashP1.setText("" + players.get(0).getMoney());
+		lblBuildP1.setText("" + players.get(0).getNumberBuildings());
+		lblPropP1.setText("" + players.get(0).getOwnproperties().size());
+		lblPosP1.setText(""+ players.get(0).getPosition());
+
+		//PLAYER 2
+		lblPlayer2name.setText(players.get(1).getName());
+		lblCashP2.setText("" + players.get(1).getMoney());
+		lblBuildP2.setText("" + players.get(1).getNumberBuildings());
+		lblPropP2.setText("" + players.get(1).getOwnproperties().size());
+		lblPosP2.setText(""+ players.get(1).getPosition());
+
+		if(players.size() > 2){
+			//PLAYER 3
+			lblPlayerName3.setText(players.get(2).getName());
+			lblCashP3.setText("" + players.get(2).getMoney());
+			lblBuildP3.setText("" + players.get(2).getNumberBuildings());
+			lblPropP3.setText("" + players.get(2).getOwnproperties().size());
+			lblPosP3.setText(""+ players.get(2).getPosition());
+
+			if(players.size() > 3){
+				//PLAYER 4
+				lblPlayerName4.setText(players.get(3).getName());
+				lblCashP4.setText("" + players.get(3).getMoney());
+				lblBuildP4.setText("" + players.get(3).getNumberBuildings());
+				lblPropP4.setText("" + players.get(3).getOwnproperties().size());
+				lblPosP4.setText(""+ players.get(3).getPosition());
+			}
+		}
+
+	}
+
+
+	/**
+	 * set players tokens
+	 */
+	private void settokens() {
+		//player 1
+		switch(players.get(0).getToken()){
+		case "dog":
+			tokenP1.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/dog.png")));
+			break;
+		case "hat":
+			tokenP1.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/hat.png")));
+			break;
+		case "thimble":
+			tokenP1.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/thimble.png")));
+			break;
+		case "car":
+			tokenP1.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/car.png")));
+			break;
+		}
+
+		//player 2
+		switch(players.get(1).getToken()){
+		case "dog":
+			tokenP2.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/dog.png")));
+			break;
+		case "hat":
+			tokenP2.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/hat.png")));
+			break;
+		case "thimble":
+			tokenP2.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/thimble.png")));
+			break;
+		case "car":
+			tokenP2.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/car.png")));
+			break;
+		}
+
+		if(players.size() > 2){
+			//player 3
+			switch(players.get(2).getToken()){
+			case "dog":
+				tokenP3.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/dog.png")));
+				break;
+			case "hat":
+				tokenP3.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/hat.png")));
+				break;
+			case "thimble":
+				tokenP3.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/thimble.png")));
+				break;
+			case "car":
+				tokenP3.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/car.png")));
+				break;
+			}
+
+			if(players.size() > 3){
+				//player 4
+				switch(players.get(3).getToken()){
+				case "dog":
+					tokenP4.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/dog.png")));
+					break;
+				case "hat":
+					tokenP4.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/hat.png")));
+					break;
+				case "thimble":
+					tokenP4.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/thimble.png")));
+					break;
+				case "car":
+					tokenP4.setIcon(new ImageIcon(PlayersPanel.class.getResource("/Images/tokens/car.png")));
+					break;
+				}
+			}
+		}
 	}
 }

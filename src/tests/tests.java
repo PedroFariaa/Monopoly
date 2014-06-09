@@ -1,4 +1,4 @@
-package tests;
+package Tests;
 
 import static org.junit.Assert.*;
 
@@ -31,7 +31,7 @@ public class tests {
 		Player p = new Player();
 		Vector<Player> v = new Vector<Player> ();
 		v.add(p);
-		Game g = new Game("", v);
+		Game g = new Game(v, "");
 		assertEquals(0,p.getOwnproperties().size());
 		g.getBoard().get(39).Buy(g.getPlayers().get(0));
 		assertEquals(1, g.getPlayers().get(0).getOwnproperties().size());
@@ -48,7 +48,7 @@ public class tests {
 		Vector<Player> v = new Vector<Player> ();
 		v.add(p);
 		v.add(p2);
-		Game g = new Game("", v);
+		Game g = new Game(v, "");
 		assertEquals(0,p.getOwnproperties().size());
 		g.getBoard().get(39).Buy(g.getPlayers().get(0));
 		assertEquals(1, g.getPlayers().get(0).getOwnproperties().size());
@@ -104,7 +104,7 @@ public class tests {
 		Player p = new Player();
 		Vector<Player> v = new Vector<Player> ();
 		v.add(p);
-		Game g = new Game("", v);
+		Game g = new Game(v, "");
 		
 		p.setPosition(30);
 		g.getBoard().get(30).Action(p);
@@ -121,7 +121,7 @@ public class tests {
 	 */
 	@Test
 	public void test_IncreasingRent(){
-		Property p = new Property("LISBOA BELEM", "DARK_BLUE", 350, 50, 200, 600, 1400, 1700, 2000, 200);
+		Property p = new Property("LISBOA BELEM", "DARK_BLUE", 350, 50, 200, 600, 1400, 1700, 2000, 200, 39);
 		assertEquals(0, p.getN_apart());
 		assertEquals(0, p.getN_hotel());
 		assertEquals(50, p.getRent());
@@ -149,7 +149,7 @@ public class tests {
 		Vector<Player> v = new Vector<Player> ();
 		v.add(p);
 		v.add(p2);
-		Game g = new Game("", v);
+		Game g = new Game(v, "");
 		
 		g.getPlayers().get(0).removeMoney(1499);
 		g.EndTurn();
@@ -168,7 +168,7 @@ public class tests {
 		Player p = new Player();
 		Vector<Player> v = new Vector<Player> ();
 		v.add(p);
-		Game g = new Game("", v);
+		Game g = new Game(v, "");
 
 		g.getPlayers().get(0).removeMoney(1499);
 		g.EndTurn();

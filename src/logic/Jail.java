@@ -1,8 +1,13 @@
 package logic;
 
-public class Jail extends Space {
+import java.io.Serializable;
+
+public class Jail extends Space implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	public Jail(){
-		
+		this.position=10;
 	}
 	
 	/**
@@ -34,6 +39,11 @@ public class Jail extends Space {
 	@Override
 	public void Unmortgage(Player p) {
 		
+	}
+
+	@Override
+	public String getClassName() {
+		return "Jail";
 	}
 
 }
